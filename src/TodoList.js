@@ -1,19 +1,19 @@
-import React, { Component, Fragment } from 'react';
-import TodoItem from './TodoItem';
-import './style.css';
+import React, { Component, Fragment } from "react";
+import TodoItem from "./TodoItem";
+import "./style.css";
 
 class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: '',
-      list: []
-    }
+      inputValue: "",
+      list: [],
+    };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBtnClick = this.handleBtnClick.bind(this);
     this.handleItemDelete = this.handleItemDelete.bind(this);
   }
-  
+
   render() {
     return (
       <Fragment>
@@ -24,15 +24,15 @@ class TodoList extends Component {
             className="input"
             value={this.state.inputValue}
             onChange={this.handleInputChange}
-            ref={(input) => {this.input = input}}
+            ref={(input) => {
+              this.input = input;
+            }}
           />
           <button onClick={this.handleBtnClick}>Submit</button>
         </div>
-        <ul>
-          { this.getTodoItem() }
-        </ul>
+        <ul>{this.getTodoItem()}</ul>
       </Fragment>
-    )
+    );
   }
 
   getTodoItem() {
@@ -44,29 +44,29 @@ class TodoList extends Component {
           index={index}
           deleteItem={this.handleItemDelete}
         />
-      )
-    })
+      );
+    });
   }
 
   handleInputChange() {
     const value = this.input.value;
     this.setState(() => ({
-      inputValue: value
+      inputValue: value,
     }));
   }
 
   handleBtnClick() {
     this.setState((prevState) => ({
       list: [...prevState.list, prevState.inputValue],
-      inputValue: ''
+      inputValue: "",
     }));
-}
+  }
 
   handleItemDelete(index) {
     this.setState((prevState) => {
       const list = [...prevState.list];
       list.splice(index, 1);
-      return { list }
+      return { list };
     });
   }
 }
