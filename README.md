@@ -1,4 +1,4 @@
-## TodoList App
+# TodoList App
 
 ## About the Project
 
