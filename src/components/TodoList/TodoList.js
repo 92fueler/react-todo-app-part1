@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
-import TodoItem from "./TodoItem";
-import "./style.css";
+import TodoItem from "../TodoItem/TodoItem";
+import "./TodoList.css";
 
 class TodoList extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class TodoList extends Component {
   render() {
     return (
       <Fragment>
-        <div>
+        <div className="todolist">
           <label htmlFor="insertArea">Please enter your Todo Item here: </label>
           <input
             id="insertArea"
@@ -28,7 +28,9 @@ class TodoList extends Component {
               this.input = input;
             }}
           />
-          <button onClick={this.handleBtnClick}>Submit</button>
+          <button className="btn" onClick={this.handleBtnClick}>
+            Submit
+          </button>
         </div>
         <ul>{this.getTodoItem()}</ul>
       </Fragment>
