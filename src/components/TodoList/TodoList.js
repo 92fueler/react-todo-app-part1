@@ -9,49 +9,18 @@ class TodoList extends Component {
       inputValue: "",
       list: [],
     };
+    this.textInput = React.createRef();
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBtnClick = this.handleBtnClick.bind(this);
     this.handleItemDelete = this.handleItemDelete.bind(this);
   }
 
-  render() {
-    return (
-      <Fragment>
-        <div className="todolist">
-          <label htmlFor="insertArea">Please enter your Todo Item here: </label>
-          <input
-            id="insertArea"
-            className="input"
-            value={this.state.inputValue}
-            onChange={this.handleInputChange}
-            ref={(input) => {
-              this.input = input;
-            }}
-          />
-          <button className="btn" onClick={this.handleBtnClick}>
-            Submit
-          </button>
-        </div>
-        <ul>{this.getTodoItem()}</ul>
-      </Fragment>
-    );
-  }
-
-  getTodoItem() {
-    return this.state.list.map((item, index) => {
-      return (
-        <TodoItem
-          key={index}
-          content={item}
-          index={index}
-          deleteItem={this.handleItemDelete}
-        />
-      );
-    });
+  componentDidMount() {
+    this.textInput.current.focus();
   }
 
   handleInputChange() {
-    const value = this.input.value;
+    const value = this.textInput.current.value;
     this.setState(() => ({
       inputValue: value,
     }));
@@ -70,6 +39,40 @@ class TodoList extends Component {
       list.splice(index, 1);
       return { list };
     });
+  }
+
+  getTodoItem() {
+    return this.state.list.map((item, index) => {
+      return (
+        <TodoItem
+          key={index}
+          content={item}
+          index={index}
+          deleteItem={this.handleItemDelete}
+        />
+      );
+    });
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <div className="todolist">
+          <label htmlFor="insertArea">Please enter your Todo Item here: </label>
+          <input
+            id="insertArea"
+            className="input"
+            value={this.state.inputValue}
+            onChange={this.handleInputChange}
+            ref={this.textInput}
+          />
+          <button className="btn" onClick={this.handleBtnClick}>
+            Submit
+          </button>
+        </div>
+        <ul>{this.getTodoItem()}</ul>
+      </Fragment>
+    );
   }
 }
 
