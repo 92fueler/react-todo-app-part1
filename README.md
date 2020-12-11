@@ -1,4 +1,5 @@
-# TodoList App
+# Todo App buit with React
+> Part 1 of a series of mini React Todo-App projects
 
 ## About the Project
 
